@@ -1,24 +1,52 @@
 <template>
   <nav class="navbar floating-navbar navbar-expand-lg sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
-      <!-- Brand -->
+      <!-- Navbar Logo -->
       <RouterLink class="navbar-brand fw-bold text-gradient" to="/">
         <i class="bi bi-lightning-charge-fill me-2"></i> Personal
       </RouterLink>
 
-      <!-- Button Toggler for (Mobile) -->
-      <button v-if="!sidebarOpen" class="custom-toggler" type="button" @click="toggleSidebar">
-        <span :class="{ 'open-span-1': sidebarOpen }"></span>
-        <span :class="{ 'open-span-2': sidebarOpen }"></span>
-        <span :class="{ 'open-span-3': sidebarOpen }"></span>
-      </button>
+   
 
       <!-- Desktop Nav -->
       <div class="nav-links d-none d-lg-flex align-items-center">
-        <RouterLink v-for="(link, i) in links" :key="i" class="nav-link" :to="link.href">
-          <i :class="link.icon"></i>
+        <RouterLink v-for="(link, i) in links" :key="i" :to="link.href" class="nav-link" :class="{ active: $route.path === link.href }">
+          <i :class="link.icon"></i> 
           <span class="ms-1">{{ link.name }}</span>
         </RouterLink>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button class="darkmode-btn" @click="toggleDarkMode">
+        <i :class="isDark ? 'bi bi-brightness-high-fill' : 'bi bi-moon-stars-fill'"></i>
+      </button>
+
+      <!-- Language on Navbar -->
+      <div class="dropdown">
+        <div class="box-flag dropdown-toggle" id="languageDropdown" data-bs-toggle="dropdown">
+          <img :src="currentFlag" alt="flag" class="ms-3" style="width: 36px; height: 22px; object-fit: fill;" />
+          {{ currentLanguage.value }}
+        </div>
+
+        <!-- Language Dropdown -->
+        <ul class="dropdown-menu my-2" >
+          <li v-for="lang in languages" :key="lang.code">
+            <a class="dropdown-item d-flex align-items-center" href="#" @click.prevent="changeLanguage(lang.code)">
+              <img :src="lang.flag" alt="flag" class="me-3 my-2" style="width: 32px; height: 22px; object-fit: cover;">
+              {{ lang.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Button Collape Sidebar -->
+      <div class="d-flex align-items-center">
+        <!-- Button Toggler for (Mobile) -->
+        <button v-if="!sidebarOpen" class="custom-toggler" type="button" @click="toggleSidebar">
+          <span :class="{ 'open-span-1': sidebarOpen }"></span>
+          <span :class="{ 'open-span-2': sidebarOpen }"></span>
+          <span :class="{ 'open-span-3': sidebarOpen }"></span>
+        </button>
       </div>
     </div>
 
@@ -26,6 +54,7 @@
     <transition name="slide">
       <div class="mobile-sidebar d-lg-none" v-show="sidebarOpen">
         <button class="close-btn" @click="closeSidebar">✕</button>
+
         <ul class="nav flex-column mt-5">
           <li v-for="(link, i) in links" :key="i" class="nav-item my-3">
             <RouterLink class="sidebar-link d-flex align-items-center justify-content-start p-2 rounded-3"
@@ -43,8 +72,6 @@
       </div>
     </transition>
 
-
-
     <!-- Overlay Opacity Background -->
     <transition name="fade">
       <div v-if="sidebarOpen" class="overlay" @click="closeSidebar"></div>
@@ -53,10 +80,32 @@
 </template>
 
 <script setup>
-import { ref, watch, onUnmounted, onMounted } from "vue";
+import { ref, watch, computed,  onUnmounted, onMounted } from "vue";
 import { RouterLink } from "vue-router";
+import { currentLanguage } from "../stores/languageStore.js";
 
 const sidebarOpen = ref(false);
+const isDark = ref(false);
+const languages = [
+  { code: "EN", name: "English", flag: "./flags/flag_english.png" },
+  { code: "KH", name: "ខ្មែរ", flag: "./flags/flag_cambodia.png" }
+];
+
+// Computed property to get the current flag
+const currentFlag = computed(() => {
+  const lang = languages.find(l => l.code === currentLanguage.value);
+  return lang ? lang.flag : "";
+});
+
+const changeLanguage = (code) => {
+  currentLanguage.value = code;
+
+  const btn = document.getElementById("languageDropdown");
+  if (btn) {
+    btn.classList.add("animate-language");
+    setTimeout(() => btn.classList.remove("animate-language"), 500);
+  }
+};
 
 const links = [
   { name: "Home", href: "/", icon: "bi bi-house-door" },
@@ -67,6 +116,14 @@ const links = [
 
 const toggleSidebar = () => (sidebarOpen.value = !sidebarOpen.value);
 const closeSidebar = () => (sidebarOpen.value = false);
+
+// Toggle Dark Mode
+const toggleDarkMode = () => {
+  isDark.value = !isDark.value;
+  document.documentElement.setAttribute("data-theme", isDark.value ? "dark" : "light");
+  localStorage.setItem("theme", isDark.value ? "dark" : "light");
+};
+
 
 watch(sidebarOpen, (isOpen) => {
   document.body.style.overflow = isOpen ? "hidden" : "";
@@ -84,7 +141,14 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", () => {
+    document.body.classList.add("no-transition");
+    if (window.innerWidth >= 992 && sidebarOpen.value) {
+      sidebarOpen.value = false;
+    }
+    // remove the class after a short delay
+    setTimeout(() => document.body.classList.remove("no-transition"), 200);
+  });
 });
 
 onUnmounted(() => {
@@ -95,7 +159,7 @@ onUnmounted(() => {
 <style scoped>
 /* 🌟 NAVBAR */
 .floating-navbar {
-  background: rgba(255, 255, 255, 0.9);
+  /* background: rgba(255, 255, 255, 0.9); */
   backdrop-filter: blur(12px);
   border-radius: 14px;
   padding: 0.9rem 1.5rem;
@@ -105,29 +169,108 @@ onUnmounted(() => {
   transition: all 0.4s ease;
   z-index: 1000;
 }
+/* 🌗 DARK MODE BUTTON */
+:root[data-theme="light"] {
+  --bg-gradient: radial-gradient(circle, #da4d40 0%, #7a2828 100%);
+  --text-color: white;
+}
+:root[data-theme="dark"] {
+  --bg-gradient: radial-gradient(circle, #2c313c 0%, 	#343b48 100%);
+  --text-color: #f5f5f5;
+}
+nav.navbar {
+  background-color: var(--bg-gradient);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.darkmode-btn {
+  margin-left: 10%;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.5s ease, transform 0.3s;
+
+}
+.darkmode-btn i {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.darkmode-btn:hover {
+  color: #ff7e5f;
+  transform: rotate(30deg);
+}
+/* Smooth language switch animation */
+.box-flag {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.box-flag:hover {
+  cursor: pointer;
+  transform: translateY(0px) scale(1.1);
+}
+.dropdown-item{
+  font-family: "Khmer OS Battambang";
+}
+.animate-language {
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(0.9); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.navbar-brand{
+  transition: all 0.3s ease;
+}
 
 .text-gradient {
   background: linear-gradient(60deg, #ff7e5f, #feb47b);
   -webkit-background-clip: text;
-  color: transparent;
+  color: white;
   font-size: 1.6rem;
 }
 
 /* NAV LINKS */
 .nav-link {
-  color: #444 !important;
+  color: white !important;
   font-weight: 500;
   font-size: 1.1rem;
   margin-left: 1.5rem;
   padding: 0.35rem 0.6rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  position: relative; /* needed for pseudo-element */
+  transition: transform 0.3s ease;
 }
-.nav-link:hover {
-  color: #ff7e5f !important;
-  background: rgba(255, 126, 95, 0.1);
-  transform: translateY(-2px);
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #feb47b;
+  transition: width 0.5s ease;
 }
+.nav-link:hover::after {
+  width: 100%;
+}
+/* Active link style */
+.nav-link.active {
+  color: #feb47b !important; /* optional: change text color */
+}
+
+.nav-link.active::after {
+  width: 100%; /* underline stays visible on active link */
+}
+
 
 /* HAMBURGER */
 .custom-toggler {
@@ -145,7 +288,7 @@ onUnmounted(() => {
   display: block;
   height: 3px;
   width: 100%;
-  background: #444;
+  background: white;
   border-radius: 3px;
   transition: all 0.35s ease;
 }
@@ -252,6 +395,10 @@ onUnmounted(() => {
 .slide-leave-to {
   transform: translateX(100%);
 }
+.no-transition .slide-enter-active,
+.no-transition .slide-leave-active {
+  transition: all 0s ease !important;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s ease;
@@ -271,6 +418,12 @@ onUnmounted(() => {
     top: 0;
     left: 0;
     right: 0;
+  }
+    .dropdown-menu {
+    margin-left: -70%;
+  }
+  .darkmode-btn {
+    margin-left: 20%;
   }
 }
 @media (min-width: 992px) {
