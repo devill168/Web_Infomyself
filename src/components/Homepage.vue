@@ -70,12 +70,17 @@
       </div>
     </div>
   </div>
+  <div 
+  ref="scrollContainer"
+  class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch overflow-auto"
+>
   <div class="dots-wrapper d-flex justify-content-center mt-3 d-lg-none d-xl-none">
   <span
     v-for="(card, idx) in 3"
     :key="idx"
     :class="['dot', activeDot === idx ? 'active' : '']"
   ></span>
+</div>
 </div>
 </div>
   </div>
@@ -103,7 +108,10 @@ const updateActiveDot = () => {
   if (!container) return;
 
   const scrollLeft = container.scrollLeft;
-  const cardWidth = container.children[0].offsetWidth + parseInt(getComputedStyle(container.children[0]).marginRight);
+  const cardWidth =
+    container.children[0].offsetWidth +
+    parseInt(getComputedStyle(container.children[0]).marginRight);
+
   activeDot.value = Math.round(scrollLeft / cardWidth);
 };
 
@@ -141,8 +149,10 @@ const typeText = () => {
 onMounted(() => {
   typeText();
 
-    if (scrollContainer.value) {
-    scrollContainer.value.addEventListener("scroll", updateActiveDot);
+    const container = scrollContainer.value;
+  if (container) {
+    container.addEventListener("scroll", updateActiveDot, { passive: true });
+    container.addEventListener("touchmove", updateActiveDot, { passive: true });
   }
 });
 
@@ -266,6 +276,11 @@ watch(currentLanguage, () => {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.scrolling-wrapper > .col-12 {
+  scroll-snap-align: start;
 }
 
 /* Hide scrollbar for aesthetics */
