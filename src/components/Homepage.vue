@@ -1,6 +1,7 @@
 <template>
-  <div class="container-fluid py-5 section-1">
-    <div class="row align-items-center">
+  <div class="container-fluid py-5 section-1 ">
+    <!-- Section-1 -->
+    <div class="row align-items-center ">
       <!-- Left Section: Personal Image -->
       <div class="col-12 col-md-6 text-center position-relative">
         <div class="flag-bg"></div>
@@ -9,12 +10,13 @@
 
       <!-- Right Section: Text -->
       <div class="section1-MainText px-4 col-12 col-md-6 text-center text-md-start">
-        <h3 class="text-light mb-2 title-section1" >{{ currentLanguage=== "KH"?"សួស្តីអ្នកទាំងអស់.! ខ្ញុំបាទឈ្មោះ" : "Hello everyone, my name is"}}</h3>
-        <h1 class="fw-bold myname-section1">{{ currentLanguage ==="KH"? "រ៉ន ហ្សានី" : "Ran Sany" }}</h1>
-       <h4 class="text-light mb-4 typing"> {{ currentLanguage==="KH"? "ខ្ញុំគឺជា" : "I'm a" }}
-         <span class="typing">{{ displayedText }}</span>
-        <span class="cursor">|</span>
-      </h4>
+        <h3 class="text-light mb-2 title-section1">{{ currentLanguage === "KH" ? "សួស្តីអ្នកទាំងអស់.! ខ្ញុំបាទឈ្មោះ" :
+          "Hello everyone, my name is"}}</h3>
+        <h1 class="fw-bold myname-section1">{{ currentLanguage === "KH" ? "រ៉ន ហ្សានី" : "Ran Sany" }}</h1>
+        <h4 class="text-light mb-4 typing"> {{ currentLanguage === "KH" ? "ខ្ញុំគឺជា" : "I'm a" }}
+          <span class="typing">{{ displayedText }}</span>
+          <span class="cursor">|</span>
+        </h4>
         <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-5">
           <i class="bi bi-google"></i>
           <i class="bi bi-twitter-x"></i>
@@ -24,6 +26,58 @@
         </div>
       </div>
     </div>
+
+    <!-- Section-2 -->
+<div class="container my-5 section-2">
+  <h2 class="text-center mb-5 title-section2">
+    {{ currentLanguage === "KH" ? "ស្នាដៃចុងក្រោយ" : "Latest Work" }}
+  </h2>
+
+  <div class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch">
+    <!-- Card 1 -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="card card-section2 shadow-sm h-100">
+        <img src="https://cdn.prod.website-files.com/619e15d781b21202de206fb5/642e5f92f6147ed845692f97_How-Mobile-App-Testing-Makes-or-Breaks-Mobile-User-Experience.webp" class="cardSection2-img-top img-fluid">
+        <div class="cardSection2-body">
+          <h5 class="cardSection2-title">Project Title 1</h5>
+          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+          <a href="#" class="btn btn-primary btn-section2">View More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="card card-section2 shadow-sm h-100">
+        <img src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/50fbf02187ca0d4b2c2ae3a27e02d52ba9fbbf74" class="cardSection2-img-top img-fluid">
+        <div class="cardSection2-body">
+          <h5 class="cardSection2-title">Project Title 2</h5>
+          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+          <a href="#" class="btn btn-primary btn-section2">View More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="card card-section2 shadow-sm h-100">
+        <img src="/img/web_pseronal.png" class="cardSection2-img-top img-fluid">
+        <div class="cardSection2-body">
+          <h5 class="cardSection2-title">Project Title 3</h5>
+          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+          <a href="#" class="btn btn-primary btn-section2">View More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dots-wrapper d-flex justify-content-center mt-3 d-lg-none d-xl-none">
+  <span
+    v-for="(card, idx) in 3"
+    :key="idx"
+    :class="['dot', activeDot === idx ? 'active' : '']"
+  ></span>
+</div>
+</div>
   </div>
 </template>
 
@@ -35,12 +89,23 @@ import { currentLanguage } from "../stores/languageStore.js"; // your global rea
 // Define the two text versions
 const fullTextEN = "Front-End Developer";
 const fullTextKH = "មន្ត្រីផ្នែកអភិវឌ្ឈន៍ប្រព័ន្ធទិន្នន័យ";
+const scrollContainer = ref(null);
+const activeDot = ref(0);
 
 const displayedText = ref("");
 let index = 0;
 let typingSpeed = 100; // milliseconds per character
 let deleting = false;
 let typingTimeout = null; // to clear timeout when language changes
+
+const updateActiveDot = () => {
+  const container = scrollContainer.value;
+  if (!container) return;
+
+  const scrollLeft = container.scrollLeft;
+  const cardWidth = container.children[0].offsetWidth + parseInt(getComputedStyle(container.children[0]).marginRight);
+  activeDot.value = Math.round(scrollLeft / cardWidth);
+};
 
 // Function to select text based on language
 const getFullText = () => {
@@ -75,6 +140,10 @@ const typeText = () => {
 // Start typing on mount
 onMounted(() => {
   typeText();
+
+    if (scrollContainer.value) {
+    scrollContainer.value.addEventListener("scroll", updateActiveDot);
+  }
 });
 
 // Watch for language change → restart animation
@@ -100,7 +169,7 @@ watch(currentLanguage, () => {
 /* Personal image above the flag */
 .personal-photo {
   position: relative;
-  z-index: 1000;
+  z-index: 1;
   max-width: 80%;
 }
 
@@ -112,10 +181,143 @@ watch(currentLanguage, () => {
   font-family: "Khmer OS Battambang";
   color:#feb47b;
 }
+.title-section2{
+  font-family: "Khmer OS Muol Light";
+}
+
+ .card-section2 {
+  position: relative;
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.card-section2:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(13, 110, 253, 0.25);
+  cursor: pointer;
+}
+
+/* Card Image */
+.cardSection2-img-top {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.card-section2:hover .cardSection2-img-top {
+  transform: scale(1.1);
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+/* Gradient Overlay */
+.card-section2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 110, 253, 0.15),
+    rgba(13, 110, 253, 0)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.card-section2:hover::after {
+  opacity: 1;
+}
+
+/* Card Body */
+.cardSection2-body {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background: transparent;
+  transition: background 0.4s ease;
+}
+
+.cardSection2-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0d6efd;
+  margin-bottom: 10px;
+}
+
+.cardSection2-text {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Make the row scrollable horizontally on medium screens */
+.scrolling-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for aesthetics */
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Add some spacing at the end */
+.scrolling-wrapper .col-12 {
+  flex: 0 0 auto;
+}
+
+/* Button Styling */
+.btn-section2 {
+  background: linear-gradient(90deg, #da4d40 0%, #7a2828 100%);
+  background-size: 200% auto; /* makes gradient larger for movement */
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #fff;
+  transition: all 0.5s ease;
+  box-shadow: 0 2px 6px rgba(13, 110, 253, 0.2);
+  background-position: left center; /* default position */
+}
+
+.btn-primary:hover {
+  background-position: right center; /* moves gradient smoothly */
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.dots-wrapper {
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: #0d6efd;
+}
+
 .typing {
   margin-top: 3%;
   font-size: 18px;
   font-family: "Khmer OS Muol Light";
+  font-weight: 500;
   padding-right: 5px;
 }
 
