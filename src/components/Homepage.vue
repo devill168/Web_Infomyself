@@ -11,7 +11,7 @@
       <!-- Right Section: Text -->
       <div class="section1-MainText px-4 col-12 col-md-6 text-center text-md-start">
         <h3 class="text-light mb-2 title-section1">{{ currentLanguage === "KH" ? "សួស្តីអ្នកទាំងអស់.! ខ្ញុំបាទឈ្មោះ" :
-          "Hello everyone, my name is"}}</h3>
+          "Hello everyone, my name is" }}</h3>
         <h1 class="fw-bold myname-section1">{{ currentLanguage === "KH" ? "រ៉ន ហ្សានី" : "Ran Sany" }}</h1>
         <h4 class="text-light mb-4 typing"> {{ currentLanguage === "KH" ? "ខ្ញុំគឺជា" : "I'm a" }}
           <span class="typing">{{ displayedText }}</span>
@@ -28,67 +28,90 @@
     </div>
 
     <!-- Section-2 -->
-<div class="container my-5 section-2">
-  <h2 class="text-center mb-5 title-section2">
-    {{ currentLanguage === "KH" ? "ស្នាដៃចុងក្រោយ" : "Latest Work" }}
+    <div class="container my-5 section-2">
+      <h2 class="text-center mb-5 title-section2">
+        {{ currentLanguage === "KH" ? "ស្នាដៃចុងក្រោយ" : "Latest Work" }}
+      </h2>
+
+      <div ref="scrollContainer" class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch">
+        <!-- Section2  Card 1 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+          <div class="card card-section2 shadow-sm h-100">
+            <img
+              src="https://cdn.prod.website-files.com/619e15d781b21202de206fb5/642e5f92f6147ed845692f97_How-Mobile-App-Testing-Makes-or-Breaks-Mobile-User-Experience.webp"
+              class="cardSection2-img-top img-fluid">
+            <div class="cardSection2-body">
+              <h5 class="cardSection2-title">Project Title 1</h5>
+              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+              <a href="#" class="btn btn-primary btn-section2">View More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section2 Card 2 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+          <div class="card card-section2 shadow-sm h-100">
+            <img
+              src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/50fbf02187ca0d4b2c2ae3a27e02d52ba9fbbf74"
+              class="cardSection2-img-top img-fluid">
+            <div class="cardSection2-body">
+              <h5 class="cardSection2-title">Project Title 2</h5>
+              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+              <a href="#" class="btn btn-primary btn-section2">View More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section2 Card 3  -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+          <div class="card card-section2 shadow-sm h-100">
+            <img src="/img/web_pseronal.png" class="cardSection2-img-top img-fluid">
+            <div class="cardSection2-body">
+              <h5 class="cardSection2-title">Project Title 3</h5>
+              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
+              <a href="#" class="btn btn-primary btn-section2">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dots-wrapper d-flex justify-content-center mt-3 d-lg-none d-xl-none">
+        <span v-for="(card, idx) in 3" :key="idx" :class="['dot', activeDot === idx ? 'active' : '']"></span>
+      </div>
+    </div>
+
+
+    <!-- Section-3 -->
+   <div class="container box-section3 my-5 section-3">
+  <h2 class="text-end mb-5 title-section3">
+    {{ currentLanguage === "KH" ? "សូចនាករ ជំនាញ" : "Skill Indicator" }}
   </h2>
 
-  <div class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch">
-    <!-- Card 1 -->
-    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-      <div class="card card-section2 shadow-sm h-100">
-        <img src="https://cdn.prod.website-files.com/619e15d781b21202de206fb5/642e5f92f6147ed845692f97_How-Mobile-App-Testing-Makes-or-Breaks-Mobile-User-Experience.webp" class="cardSection2-img-top img-fluid">
-        <div class="cardSection2-body">
-          <h5 class="cardSection2-title">Project Title 1</h5>
-          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-          <a href="#" class="btn btn-primary btn-section2">View More</a>
-        </div>
-      </div>
-    </div>
+  <img src="/img/saky.png" class="img-fluid cardSection3-img" />
 
-    <!-- Card 2 -->
-    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-      <div class="card card-section2 shadow-sm h-100">
-        <img src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/50fbf02187ca0d4b2c2ae3a27e02d52ba9fbbf74" class="cardSection2-img-top img-fluid">
-        <div class="cardSection2-body">
-          <h5 class="cardSection2-title">Project Title 2</h5>
-          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-          <a href="#" class="btn btn-primary btn-section2">View More</a>
+  <div class="row py-3 bg-light">
+  <div v-for="(skill, index) in skills" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 py-3" ref="skillCards">
+    <div class="card h-100 text-center shadow-sm border-0">
+      <div class="card-title">{{ skill.title }}</div>
+      <div class="card-body">
+        <h5 class="card-title mb-3">{{ skill.name }}</h5>
+        <!-- Animated Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar" :style="{ width: skill.currentLevel + '%' }"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-      <div class="card card-section2 shadow-sm h-100">
-        <img src="/img/web_pseronal.png" class="cardSection2-img-top img-fluid">
-        <div class="cardSection2-body">
-          <h5 class="cardSection2-title">Project Title 3</h5>
-          <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-          <a href="#" class="btn btn-primary btn-section2">View More</a>
+        <!-- Animated Percentage -->
+        <div class="percentage mt-2">{{ Math.floor(skill.currentLevel) }}%</div>
         </div>
-      </div>
     </div>
   </div>
-  <div 
-  ref="scrollContainer"
-  class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch overflow-auto"
->
-  <div class="dots-wrapper d-flex justify-content-center mt-3 d-lg-none d-xl-none">
-  <span
-    v-for="(card, idx) in 3"
-    :key="idx"
-    :class="['dot', activeDot === idx ? 'active' : '']"
-  ></span>
 </div>
-</div>
+
 </div>
   </div>
 </template>
 
 <script setup lang="js">
 
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, nextTick } from "vue";
 import { currentLanguage } from "../stores/languageStore.js"; // your global reactive var
 
 // Define the two text versions
@@ -103,21 +126,32 @@ let typingSpeed = 100; // milliseconds per character
 let deleting = false;
 let typingTimeout = null; // to clear timeout when language changes
 
-const updateActiveDot = () => {
-  const container = scrollContainer.value;
-  if (!container) return;
+// Skill data with progress levels
+const skills = ref([
+  {name: "C# Programming", level: 90, currentLevel: 0 },
+  {name: "Vue.js / Front-End", level: 85, currentLevel: 0 },
+  {name: "Database Design", level: 75, currentLevel: 0 },
+  {name: "UI/UX Design", level: 70, currentLevel: 0 },
+]);
+const skillCards = ref([]);
 
-  const scrollLeft = container.scrollLeft;
-  const cardWidth =
-    container.children[0].offsetWidth +
-    parseInt(getComputedStyle(container.children[0]).marginRight);
+// Animate progress bars when in view
+const animateSkill = (skill) => {
+  let start = 0;
+  const end = skill.level;
+  const duration = 1500; // 1.5 seconds
+  const stepTime = 20; // 20ms per step
+  const step = (end / duration) * stepTime;
 
-  activeDot.value = Math.round(scrollLeft / cardWidth);
-};
-
-// Function to select text based on language
-const getFullText = () => {
-  return currentLanguage.value === "KH" ? fullTextKH : fullTextEN;
+  const interval = setInterval(() => {
+    start += step;
+    if (start >= end) {
+      skill.currentLevel = end;
+      clearInterval(interval);
+    } else {
+      skill.currentLevel = start;
+    }
+  }, stepTime);
 };
 
 // Typing animation
@@ -145,8 +179,27 @@ const typeText = () => {
   }
 };
 
+
+//Animation Dot Dot Touch Scroll
+const updateActiveDot = () => {
+  const container = scrollContainer.value;
+  if (!container) return;
+
+  const scrollLeft = container.scrollLeft;
+  const cardWidth =
+    container.children[0].offsetWidth +
+    parseInt(getComputedStyle(container.children[0]).marginRight);
+
+  activeDot.value = Math.round(scrollLeft / cardWidth);
+};
+
+// Function to select text based on language
+const getFullText = () => {
+  return currentLanguage.value === "KH" ? fullTextKH : fullTextEN;
+};
+
 // Start typing on mount
-onMounted(() => {
+onMounted( async() => {
   typeText();
 
     const container = scrollContainer.value;
@@ -154,6 +207,24 @@ onMounted(() => {
     container.addEventListener("scroll", updateActiveDot, { passive: true });
     container.addEventListener("touchmove", updateActiveDot, { passive: true });
   }
+  await nextTick();
+  // IntersectionObserver triggers animation when skill cards are visible
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = skillCards.value.indexOf(entry.target);
+          if (idx !== -1) animateSkill(skills.value[idx]);
+          observer.unobserve(entry.target); // animate only once
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  skillCards.value.forEach((card) => observer.observe(card));
+
+  observeSkills();
 });
 
 // Watch for language change → restart animation
@@ -167,6 +238,30 @@ watch(currentLanguage, () => {
 </script>
 
 <style scoped>
+
+/* --- Skill Progress Bar Styles --- */
+.progress-container {
+  width: 100%;
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  border-radius: 6px;
+  transition: width 1.5s ease-out; /* smooth animation */
+}
+
+.percentage {
+  font-weight: 600;
+  color: #0d6efd;
+  font-size: 0.95rem;
+}
+
 /* Flag as background layer */
 .flag-bg {
   background: url("/img/cambodia-flag.webp") center center/cover no-repeat;
@@ -270,6 +365,14 @@ watch(currentLanguage, () => {
   line-height: 1.6;
 }
 
+.cardSection3-img{
+  width: 25%;
+  height: 25%;
+  display: block;
+  margin: 0 auto; /* centers horizontally */
+}
+
+
 /* Make the row scrollable horizontally on medium screens */
 .scrolling-wrapper {
   overflow-x: auto;
@@ -357,5 +460,10 @@ watch(currentLanguage, () => {
   .personal-photo{
     z-index: 1;
   }
+  .cardSection3-img{
+  width: 50%;
+  height: 50%;
+  }
 }
+
 </style>
