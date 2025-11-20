@@ -110,7 +110,9 @@
 
 
   <div class="container section-4">
-    <h2 class="text-start mb-5 title-section4">{{ currentLanguage ==="KH"? "កម្មវិធីមួយចំនួនដែលយើងខ្ញុំបានធ្វើការជាមួយ" : "Some of the programs we have worked with"}}</h2>
+    <h2 class="text-start mb-5 title-section4">{{ currentLanguage ==="KH"? "រចនាសម្ព័ន្ធក្នុងផ្នែកបច្ចុប្បន្ន" : "Organization Unit"}}</h2>
+
+        <div id="chartDiv"></div>
   </div>
 
   </div>
@@ -120,6 +122,102 @@
 
 import { ref, watch, onMounted, nextTick } from "vue";
 import { currentLanguage } from "../stores/languageStore.js"; // your global reactive var
+const orgData = [
+  {
+    id: "1",
+    parent: "",
+    name: "Mr.Ngor Pengby",
+    position: "Head Of Unit",
+    phone: "0123456789",
+    email: "john@example.com",
+    address: "Phnom Penh",
+    photo: "/img/personal.png"
+  },
+  {
+    id: "2",
+    parent: "1",
+    name: "Sok Kimleng",
+    position: "Senior Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/saky.png"
+  },
+  {
+    id: "3",
+    parent: "1",
+    name: "Yoem Rattana",
+    position: "Senior Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/saky.png"
+  }
+];
+
+/* Convert JSON → JSC Series */
+function makeSeries(data) {
+  return [
+    {
+      points: data.map(item => ({
+        id: item.id,
+        parent: item.parent === "" ? null : item.parent,
+        name: item.name,
+        attributes: {
+          position: item.position,
+          phone: item.phone,
+          email: item.email,
+          address: item.address,
+          photo: item.photo
+        }
+      }))
+    }
+  ];
+}
+
+onMounted(() => {
+  const series = makeSeries(orgData);
+  renderChart(series);
+});
+
+function renderChart(series) {
+  JSC.chart("chartDiv", {
+    type: "organizational down",
+    defaultTooltip: {
+      asHTML: true,
+      outline: "none",
+      text: `
+        <div class="tooltipBox">
+          Phone: <b>%attr.phone</b><br>
+          Email: <b>%attr.email</b><br>
+          Address: <b>%attr.address</b>
+        </div>
+      `
+    },
+    defaultPoint: {
+      connectorLine: { width: 1, color: "#dcdcdc" },
+      annotation: {
+        asHTML: true,
+        padding: 4,
+        label: {
+          text: `
+            <div style="text-align:center;">
+              <img src="%photo" width="70" height="70" style="border-radius:6px;"/>
+              <div class="personDescription">
+                <b>%position</b><br>
+                %name
+              </div>
+            </div>
+          `
+        }
+      }
+    },
+    series
+  });
+}
+
+
+
 
 // Define the two text versions
 const fullTextEN = "Front-End Developer";
@@ -280,7 +378,31 @@ watch(currentLanguage, () => {
 </script>
 
 <style scoped>
+/* Updated Chart Container Style */
+#chartDiv {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;        /* You can change this */
+  margin: 0 auto;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  background: #fafafa;
+  padding: 10px;
+}
 
+.personDescription {
+  background-color: #eeeeee;
+  padding: 6px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.tooltipBox {
+  background-color: #555;
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
+}
 
 /* --- Skill Progress Bar Styles --- */
 .progress-container {
