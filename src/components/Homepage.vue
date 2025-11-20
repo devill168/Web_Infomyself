@@ -80,32 +80,39 @@
     </div>
 
 
-    <!-- Section-3 -->
-   <div class="container box-section3 my-5 section-3">
-  <h2 class="text-end mb-5 title-section3">
-    {{ currentLanguage === "KH" ? "សូចនាករ ជំនាញ" : "Skill Indicator" }}
-  </h2>
+  <!-- Section-3 -->
+  <div class="container box-section3 my-5 section-3">
+    <h2 class="text-end mb-5 title-section3">
+      {{ currentLanguage === "KH" ? "សូចនាករ ជំនាញ" : "Skill Indicator" }}
+    </h2>
 
-  <img src="/img/saky.png" class="img-fluid cardSection3-img" />
+    <img src="/img/saky.png" class="img-fluid cardSection3-img" />
 
-  <div class="row py-3 bg-light">
-  <div v-for="(skill, index) in skills" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 py-3" ref="skillCards">
-    <div class="card h-100 text-center shadow-sm border-0">
-      <div class="card-title">{{ skill.title }}</div>
-      <div class="card-body">
-        <h5 class="card-title mb-3">{{ skill.name }}</h5>
-        <!-- Animated Progress Bar -->
-        <div class="progress-container">
-          <div class="progress-bar" :style="{ width: skill.currentLevel + '%' }"></div>
+    <div class="row py-3 rounded-4  bg-white">
+      <div v-for="(skill, index) in skills" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 py-3" ref="skillCards">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-title fw-bold fs-5">{{ skill.title }}</div>
+          <div class="card-body">
+            <div v-for="(subSkill, i) in skill.items" :key="i" class="mb-4">
+              <h6 class="card-subtitle mb-1">{{ subSkill.name }}</h6>
+              <!-- Animated Progress Bar -->
+              <div class="progress-container">
+                <div class="progress-bar" :style="{ width: subSkill.currentLevel + '%' }"></div>
+              </div>
+              <!-- Animated Percentage -->
+              <div class="percentage mt-1">{{ Math.floor(subSkill.currentLevel) }}%</div>
+            </div>
+          </div>
         </div>
-        <!-- Animated Percentage -->
-        <div class="percentage mt-2">{{ Math.floor(skill.currentLevel) }}%</div>
-        </div>
+      </div>
     </div>
   </div>
-</div>
 
-</div>
+
+  <div class="container section-4">
+    <h2 class="text-start mb-5 title-section4">{{ currentLanguage ==="KH"? "កម្មវិធីមួយចំនួនដែលយើងខ្ញុំបានធ្វើការជាមួយ" : "Some of the programs we have worked with"}}</h2>
+  </div>
+
   </div>
 </template>
 
@@ -128,28 +135,60 @@ let typingTimeout = null; // to clear timeout when language changes
 
 // Skill data with progress levels
 const skills = ref([
-  {name: "C# Programming", level: 90, currentLevel: 0 },
-  {name: "Vue.js / Front-End", level: 85, currentLevel: 0 },
-  {name: "Database Design", level: 75, currentLevel: 0 },
-  {name: "UI/UX Design", level: 70, currentLevel: 0 },
+  {
+    title: "Programming",
+    items: [
+      { name: "C#", level: 90, currentLevel: 0 },
+      { name: "Java", level: 85, currentLevel: 0 },
+      { name: "Python", level: 80, currentLevel: 0 },
+      { name: "VB.Net", level: 70, currentLevel: 0 },
+    ],
+  },
+  {
+    title: "Web Developer",
+    items: [
+      { name: "Vue.js", level: 95, currentLevel: 0 },
+      { name: "React.js", level: 90, currentLevel: 0 },
+      { name: "PHP", level: 85, currentLevel: 0 },
+      { name: "Node.js", level: 75, currentLevel: 0 },
+    ],
+  },
+  {
+    title: "Database Design",
+    items: [
+      { name: "SQL Server", level: 88, currentLevel: 0 },
+      { name: "MySQL", level: 85, currentLevel: 0 },
+      { name: "MongoDB", level: 80, currentLevel: 0 },
+      { name: "Firebase", level: 70, currentLevel: 0 },
+    ],
+  },
+  {
+    title: "UX/UI",
+    items: [
+      { name: "Adobe XD", level: 90, currentLevel: 0 },
+      { name: "Figma", level: 85, currentLevel: 0 },
+      { name: "Canvas", level: 75, currentLevel: 0 },
+      { name: "Photoshop", level: 80, currentLevel: 0 },
+    ],
+  },
 ]);
 const skillCards = ref([]);
 
 // Animate progress bars when in view
-const animateSkill = (skill) => {
+const animateSkill = (subSkill) => {
   let start = 0;
-  const end = skill.level;
-  const duration = 1500; // 1.5 seconds
-  const stepTime = 20; // 20ms per step
+  const end = subSkill.level;
+  const duration = 1500;
+  const stepTime = 20;
   const step = (end / duration) * stepTime;
 
   const interval = setInterval(() => {
     start += step;
     if (start >= end) {
-      skill.currentLevel = end;
+      subSkill.currentLevel = end;
       clearInterval(interval);
     } else {
-      skill.currentLevel = start;
+      subSkill.currentLevel = start;
     }
   }, stepTime);
 };
@@ -208,22 +247,25 @@ onMounted( async() => {
     container.addEventListener("touchmove", updateActiveDot, { passive: true });
   }
   await nextTick();
-  // IntersectionObserver triggers animation when skill cards are visible
+
+  // Observe each skill card
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const idx = skillCards.value.indexOf(entry.target);
-          if (idx !== -1) animateSkill(skills.value[idx]);
-          observer.unobserve(entry.target); // animate only once
+          if (idx !== -1) {
+            skills.value[idx].items.forEach((sub) => animateSkill(sub));
+          }
+          observer.unobserve(entry.target); // Animate once
         }
       });
     },
     { threshold: 0.5 }
   );
-
-  skillCards.value.forEach((card) => observer.observe(card));
-
+  skillCards.value.forEach((card) => {
+    if (card) observer.observe(card);
+  });
   observeSkills();
 });
 
@@ -239,6 +281,7 @@ watch(currentLanguage, () => {
 
 <style scoped>
 
+
 /* --- Skill Progress Bar Styles --- */
 .progress-container {
   width: 100%;
@@ -248,18 +291,26 @@ watch(currentLanguage, () => {
   overflow: hidden;
 }
 
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #0d6efd, #6610f2);
-  border-radius: 6px;
-  transition: width 1.5s ease-out; /* smooth animation */
+.progress-container {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 8px;
 }
-
+.card-subtitle{
+  text-align: left;
+  font-weight: normal;
+  font-size: 13px;
+}
+.progress-bar {
+  background-color: orange;
+  height: 8px;
+  transition: width 0.3s ease;
+}
 .percentage {
-  font-weight: 600;
-  color: #0d6efd;
-  font-size: 0.95rem;
+  font-size: 12px;
+  text-align: right;
+  color: #333;
 }
 
 /* Flag as background layer */
@@ -370,6 +421,9 @@ watch(currentLanguage, () => {
   height: 25%;
   display: block;
   margin: 0 auto; /* centers horizontally */
+}
+.title-section3{
+  font-family: "Khmer OS Muol Light";
 }
 
 
