@@ -2,12 +2,15 @@
 <div id="app" class="app-container">
     <Navbar @toggle-dark="toggleDarkMode" />
     <RouterView />
+    <FooterVue />
   </div>
 </template>
 
 <script setup>
 import { ref} from "vue";
 import Navbar from "./components/Navbar.vue";
+import FooterVue from "./components/Footer.vue";
+
 
 const isDark = ref(false); // always light mode on refresh
 document.documentElement.setAttribute("data-theme", "light");

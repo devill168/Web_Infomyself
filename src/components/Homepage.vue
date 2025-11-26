@@ -17,7 +17,7 @@
           <span class="typing">{{ displayedText }}</span>
           <span class="cursor">|</span>
         </h4>
-        <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-5">
+        <div class="social-icons d-flex justify-content-center justify-content-md-start gap-3 fs-5">
           <i class="bi bi-google"></i>
           <i class="bi bi-twitter-x"></i>
           <i class="bi bi-facebook"></i>
@@ -80,40 +80,45 @@
     </div>
 
 
-  <!-- Section-3 -->
-  <div class="container box-section3 my-5 section-3">
-    <h2 class="text-end mb-5 title-section3">
-      {{ currentLanguage === "KH" ? "សូចនាករ ជំនាញ" : "Skill Indicator" }}
-    </h2>
+    <!-- Section-3 -->
+    <div class="container box-section3 my-5 section-3">
+      <h2 class="text-end mb-5 title-section3">
+        {{ currentLanguage === "KH" ? "សូចនាករ ជំនាញ" : "Skill Indicator" }}
+      </h2>
 
-    <img src="/img/saky.png" class="img-fluid cardSection3-img" />
+      <img src="/img/saky.png" class="img-fluid cardSection3-img" />
 
-    <div class="row py-3 rounded-4  bg-white">
-      <div v-for="(skill, index) in skills" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 py-3" ref="skillCards">
-        <div class="card h-100 text-center shadow-sm border-0">
-          <div class="card-title fw-bold fs-5">{{ skill.title }}</div>
-          <div class="card-body">
-            <div v-for="(subSkill, i) in skill.items" :key="i" class="mb-4">
-              <h6 class="card-subtitle mb-1">{{ subSkill.name }}</h6>
-              <!-- Animated Progress Bar -->
-              <div class="progress-container">
-                <div class="progress-bar" :style="{ width: subSkill.currentLevel + '%' }"></div>
+      <div class="row py-3 rounded-4  bg-white">
+        <div v-for="(skill, index) in skills" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 py-3"
+          ref="skillCards">
+          <div class="card h-100 text-center shadow-sm border-0">
+            <div class="card-title fw-bold fs-5">{{ skill.title }}</div>
+            <div class="card-body">
+              <div v-for="(subSkill, i) in skill.items" :key="i" class="mb-4">
+                <h6 class="card-subtitle mb-1">{{ subSkill.name }}</h6>
+                <!-- Animated Progress Bar -->
+                <div class="progress-container">
+                  <div class="progress-bar" :style="{ width: subSkill.currentLevel + '%' }"></div>
+                </div>
+                <!-- Animated Percentage -->
+                <div class="percentage mt-1">{{ Math.floor(subSkill.currentLevel) }}%</div>
               </div>
-              <!-- Animated Percentage -->
-              <div class="percentage mt-1">{{ Math.floor(subSkill.currentLevel) }}%</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <div class="container section-4">
-    <h2 class="text-start mb-5 title-section4">{{ currentLanguage ==="KH"? "រចនាសម្ព័ន្ធក្នុងផ្នែកបច្ចុប្បន្ន" : "Organization Unit"}}</h2>
+    <div class="container section-4">
+      <h2 class="text-start mb-5 title-section4">{{ currentLanguage ==="KH"? "រចនាសម្ព័ន្ធក្នុងផ្នែកបច្ចុប្បន្ន" :
+        "Organization Unit"}}</h2>
 
+      <div class="chart-wrapper">
+        <h3 class="text-center">MIS Unit</h3>
         <div id="chartDiv"></div>
-  </div>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -126,36 +131,75 @@ const orgData = [
   {
     id: "1",
     parent: "",
-    name: "Mr.Ngor Pengby",
+    name: "Ngor Pengby",
     position: "Head Of Unit",
     phone: "0123456789",
     email: "john@example.com",
     address: "Phnom Penh",
-    photo: "/img/personal.png"
+    photo: "/img/Ngor_Pengby.png"
   },
   {
     id: "2",
     parent: "1",
     name: "Sok Kimleng",
-    position: "Senior Officer",
+    position: "Senior Developer",
     phone: "0987654321",
     email: "sara@example.com",
     address: "Phnom Penh",
-    photo: "/img/saky.png"
+    photo: "/img/Sok Kimleng.png"
   },
   {
     id: "3",
     parent: "1",
     name: "Yoem Rattana",
-    position: "Senior Officer",
+    position: "Senior Developer",
     phone: "0987654321",
     email: "sara@example.com",
     address: "Phnom Penh",
-    photo: "/img/saky.png"
+    photo: "/img/Yoem Rattana.png"
+  },
+    {
+    id: "4",
+    parent: "2",
+    name: "Hem Vanna",
+    position: "Designer & Coordinator Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/Hem Vanna.png"
+  },
+      {
+    id: "5",
+    parent: "2",
+    name: "Ou Vunsokserey",
+    position: "Data Analyzer Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/Ou Vunsokserey.png"
+  },
+      {
+    id: "6",
+    parent: "3",
+    name: "Ran Sany",
+    position: "IT Support Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/Mr.Ran Sany.png"
+  },
+    {
+    id: "7",
+    parent: "3",
+    name: "Soam Daroth",
+    position: "Assistant Developer Officer",
+    phone: "0987654321",
+    email: "sara@example.com",
+    address: "Phnom Penh",
+    photo: "/img/Daroth.png"
   }
 ];
 
-/* Convert JSON → JSC Series */
 function makeSeries(data) {
   return [
     {
@@ -180,29 +224,29 @@ onMounted(() => {
   renderChart(series);
 });
 
+/* Render Chart */
 function renderChart(series) {
   JSC.chart("chartDiv", {
     type: "organizational down",
-    defaultTooltip: {
-      asHTML: true,
-      outline: "none",
-      text: `
-        <div class="tooltipBox">
-          Phone: <b>%attr.phone</b><br>
-          Email: <b>%attr.email</b><br>
-          Address: <b>%attr.address</b>
-        </div>
-      `
-    },
+    tooltip: { enabled: false }, // Disable tooltips
+
     defaultPoint: {
-      connectorLine: { width: 1, color: "#dcdcdc" },
+      tooltip: false, // No JSC tooltip
+      title: "",      // No browser tooltip
+
+      connectorLine: {
+        width: 3,
+        color: "#dcdcdc",
+        animation: { duration: 600 }
+      },
+
       annotation: {
         asHTML: true,
         padding: 4,
         label: {
           text: `
-            <div style="text-align:center;">
-              <img src="%photo" width="70" height="70" style="border-radius:6px;"/>
+            <div class="nodeBox">
+              <img class="zoomPhoto" src="%photo" width="110" height="120" />
               <div class="personDescription">
                 <b>%position</b><br>
                 %name
@@ -212,9 +256,17 @@ function renderChart(series) {
         }
       }
     },
+
+    animation: {
+      duration: 600,
+      type: "fadeInUp",
+      easing: "easeOut"
+    },
+
     series
   });
 }
+
 
 
 
@@ -379,39 +431,27 @@ watch(currentLanguage, () => {
 
 <style scoped>
 /* Updated Chart Container Style */
+.chart-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 #chartDiv {
   width: 100%;
-  max-width: 900px;
-  height: 500px;        /* You can change this */
-  margin: 0 auto;
-  border: 1px solid #e3e3e3;
-  border-radius: 8px;
-  background: #fafafa;
-  padding: 10px;
+  height: 650px;
 }
 
-.personDescription {
-  background-color: #eeeeee;
-  padding: 6px;
-  border-radius: 6px;
-  margin-top: 4px;
+@media (max-width: 991px) {
+  .section-4 {
+    display: none !important;
+  }
 }
 
-.tooltipBox {
-  background-color: #555;
-  color: white;
-  border-radius: 4px;
-  padding: 5px;
-}
-
-/* --- Skill Progress Bar Styles --- */
-.progress-container {
-  width: 100%;
-  height: 12px;
-  background: #e9ecef;
-  border-radius: 6px;
-  overflow: hidden;
-}
 
 .progress-container {
   background-color: #e9ecef;
@@ -459,6 +499,38 @@ watch(currentLanguage, () => {
   font-family: "Khmer OS Battambang";
   color:#feb47b;
 }
+.social-icons i {
+  transition: all 0.3s ease; /* Smooth animation */
+  color: #ffffff; /* default color */
+  cursor: pointer;
+}
+
+/* Hover effects with brand colors */
+.social-icons i.bi-google:hover {
+  color: #da4d40; /* Google Blue */
+  transform: scale(1.2);
+}
+
+.social-icons i.bi-twitter-x:hover {
+  color: black; /* Twitter X Blue */
+  transform: scale(1.2);
+}
+
+.social-icons i.bi-facebook:hover {
+  color: blue; /* Facebook Blue */
+  transform: scale(1.2);
+}
+
+.social-icons i.bi-telegram:hover {
+  color: #0088cc; /* Telegram Blue */
+  transform: scale(1.2);
+}
+
+.social-icons i.bi-twitter:hover {
+  color: #1DA1F2; /* Twitter Blue */
+  transform: scale(1.2);
+}
+
 .title-section2{
   font-family: "Khmer OS Muol Light";
 }
