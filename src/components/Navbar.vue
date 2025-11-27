@@ -438,7 +438,53 @@ nav.navbar {
 }
 @media (min-width: 992px) {
   .custom-toggler {
-    display: none;
+    
   }
 }
+/* 📱 Fix layout when screen < 440px */
+@media (max-width: 440px) {
+
+  .floating-navbar {
+    padding: 0.5rem 0.8rem;
+  }
+
+  /* shrink logo */
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  /* Reduce darkmode button size */
+  .darkmode-btn {
+    margin-left: 5%;
+    font-size: 1.1rem;
+  }
+  .darkmode-btn i {
+    font-size: 1.1rem;
+  }
+
+  /* Make language selector smaller */
+  .box-flag {
+    font-size: 0.8rem;
+  }
+  .box-flag img {
+    width: 28px !important;
+    height: 18px !important;
+  }
+
+  /* Fix dropdown position so it does NOT overflow the screen */
+  .dropdown-menu {
+    left: -50px !important;
+    transform: translateX(-30%);
+  }
+
+  /* Shrink hamburger button */
+  .custom-toggler {
+    width: 28px;
+    height: 20px;
+  }
+  .custom-toggler span {
+    height: 2px;
+  }
+}
+
 </style>
