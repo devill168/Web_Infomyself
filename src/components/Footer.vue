@@ -16,7 +16,7 @@
               <i class="fab fa-github"></i>
               <span class="glow"></span>
             </div>
-            <span class="brand-title">Download Source Code</span>
+            <span class="brand-title"><a href="https://www.deepseek.com/">Download Source Code</a></span>
             <p class="brand-text">
               Discover and explore GitHub users and their repositories. Built with Vue.js.
             </p>
@@ -167,13 +167,19 @@
     color: white;
   }
 
-  .brand-title {
+  .brand-title a {
+    text-decoration: none;
     display: inline-block;
     margin-top: 10px;
     font-weight: bold;
     font-size: 22px;
     margin-left: 5px;
     background: linear-gradient(to right, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .brand-title a:hover {
+    background: linear-gradient(to right,#a77fec,#0f3c9d) ;
     -webkit-background-clip: text;
     color: transparent;
   }

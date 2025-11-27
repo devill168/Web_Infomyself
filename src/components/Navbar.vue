@@ -12,7 +12,7 @@
       <div class="nav-links d-none d-lg-flex align-items-center">
         <RouterLink v-for="(link, i) in links" :key="i" :to="link.href" class="nav-link" :class="{ active: $route.path === link.href }">
           <i :class="link.icon"></i> 
-          <span class="ms-1">{{ link.name }}</span>
+          <span class="ms-1 nav-style">{{ link.name }}</span>
         </RouterLink>
       </div>
 
@@ -107,13 +107,22 @@ const changeLanguage = (code) => {
   }
 };
 
-const links = [
-  { name: "Home", href: "/", icon: "bi bi-house-door" },
-  { name: "About", href: "/about", icon: "bi bi-person" },
-  { name: "Experience", href: "/experience", icon: "bi bi-briefcase" },
-  { name: "Contact", href: "/Contact", icon: "bi bi-phone" },
-];
+const links = computed(() => linkTranslations[currentLanguage.value]);
+const linkTranslations = {
+  EN: [
+    { name: "Home", href: "/", icon: "bi bi-house-door" },
+    { name: "About", href: "/about", icon: "bi bi-person" },
+    { name: "Experience", href: "/experience", icon: "bi bi-briefcase" },
+    { name: "Contact", href: "/Contact", icon: "bi bi-phone" }
+  ],
 
+  KH: [
+    { name: "ទំព័រដើម", href: "/", icon: "bi bi-house-door" },
+    { name: "អំពីយើងខ្ញុំ", href: "/about", icon: "bi bi-person" },
+    { name: "បទពិសោធន៍", href: "/experience", icon: "bi bi-briefcase" },
+    { name: "ទំនាក់ទំនង", href: "/Contact", icon: "bi bi-phone" }
+  ]
+};
 const toggleSidebar = () => (sidebarOpen.value = !sidebarOpen.value);
 const closeSidebar = () => (sidebarOpen.value = false);
 
@@ -182,6 +191,7 @@ nav.navbar {
   background-color: var(--bg-gradient);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+  font-family: "Khmer OS Metal Chrieng";
 }
 
 .darkmode-btn {

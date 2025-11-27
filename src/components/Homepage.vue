@@ -27,57 +27,112 @@
       </div>
     </div>
 
-    <!-- Section-2 -->
-    <div class="container my-5 section-2">
-      <h2 class="text-center mb-5 title-section2">
-        {{ currentLanguage === "KH" ? "ស្នាដៃចុងក្រោយ" : "Latest Work" }}
-      </h2>
 
-      <div ref="scrollContainer" class="scrolling-wrapper row flex-row flex-nowrap g-4 align-items-stretch">
-        <!-- Section2  Card 1 -->
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-          <div class="card card-section2 shadow-sm h-100">
-            <img
-              src="https://cdn.prod.website-files.com/619e15d781b21202de206fb5/642e5f92f6147ed845692f97_How-Mobile-App-Testing-Makes-or-Breaks-Mobile-User-Experience.webp"
-              class="cardSection2-img-top img-fluid">
-            <div class="cardSection2-body">
-              <h5 class="cardSection2-title">Project Title 1</h5>
-              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-              <a href="#" class="btn btn-primary btn-section2">View More</a>
+   <!-- Section-2 -->
+  <div class="section-2">
+    <div class="title-border "></div>
+    <div class="container">
+      <h2 class="section-title">{{ currentLanguage === "KH" ? "ស្នាដៃរបស់ចុងក្រោយខ្ញុំ" : "Our Lasted Projects" }}</h2>
+      <p class="section-subtitle">{{ currentLanguage === "KH" ? "ដំណោះស្រាយជូនលោកអ្នកប្រកបដោយភាពច្នៃប្រឌិតដែលបង្កើតឡើងដោយបច្ចេកវិទ្យាទំនើប" : "Innovative software solutions built with modern technologies" }}</p>
+      
+      <div class="cards-container">
+        <div 
+          v-for="(card, index) in cards" 
+          :key="card.id"
+          class="card"
+          :class="{ 'loading': isLoading }"
+          :style="{ '--delay': index * 0.1 + 's' }"
+        >
+          <!-- Loading Skeleton -->
+          <div v-if="isLoading" class="skeleton">
+            <div class="skeleton-image"></div>
+            <div class="skeleton-content">
+              <div class="skeleton-title"></div>
+              <div class="skeleton-description"></div>
+              <div class="skeleton-footer"></div>
             </div>
           </div>
-        </div>
-
-        <!-- Section2 Card 2 -->
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-          <div class="card card-section2 shadow-sm h-100">
-            <img
-              src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/50fbf02187ca0d4b2c2ae3a27e02d52ba9fbbf74"
-              class="cardSection2-img-top img-fluid">
-            <div class="cardSection2-body">
-              <h5 class="cardSection2-title">Project Title 2</h5>
-              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-              <a href="#" class="btn btn-primary btn-section2">View More</a>
+          
+          <!-- Card Content -->
+          <div v-else class="card-content">
+            <div class="card-image">
+              <img 
+                :src="card.thumbnailUrl" 
+                :alt="card.title" 
+                loading="lazy"
+                @error="(e) => handleImageError(e, card)"
+              />
+              <div class="card-overlay">
+                <button class="view-btn" @click="viewProject(card)">
+                  <i class="fas fa-external-link-alt"></i>
+                  View Project
+                </button>
+              </div>
+              <div class="card-shine"></div>
+              <div class="project-badge">
+                <span class="category-badge">{{ card.category }}</span>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Section2 Card 3  -->
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-          <div class="card card-section2 shadow-sm h-100">
-            <img src="/img/web_pseronal.png" class="cardSection2-img-top img-fluid">
-            <div class="cardSection2-body">
-              <h5 class="cardSection2-title">Project Title 3</h5>
-              <p class="cardSection2-text">A short description of your project or work sample goes here.</p>
-              <a href="#" class="btn btn-primary btn-section2">View More</a>
+            <div class="card-body">
+              <h3 class="card-title">{{ formatTitle(card.title) }}</h3>
+              <p class="card-description">{{ card.description }}</p>
+              
+              <!-- Tech Stack -->
+              <div class="tech-stack">
+                <span 
+                  v-for="tech in card.techStack" 
+                  :key="tech"
+                  class="tech-tag"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              
+              <div class="card-footer">
+                <div class="project-info">
+                  <span 
+                    class="status-badge"
+                    :style="{ backgroundColor: getStatusColor(card.status) }"
+                  >
+                    {{ card.status }}
+                  </span>
+                </div>
+                <button 
+                  class="like-btn" 
+                  @click="toggleLike(card.id)"
+                  :class="{ 'liked': card.liked }"
+                >
+                  <i :class="['fas', 'fa-heart']"></i>
+                  {{ card.liked ? 'Saved' : 'Save' }}
+                </button>
+              </div>
             </div>
+            <div class="card-border"></div>
           </div>
         </div>
       </div>
-      <div class="dots-wrapper d-flex justify-content-center mt-3 d-lg-none d-xl-none">
-        <span v-for="(card, idx) in 3" :key="idx" :class="['dot', activeDot === idx ? 'active' : '']"></span>
+      
+      <!-- Error Message -->
+      <div v-if="error && !isLoading" class="error-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button @click="fetchData" class="retry-btn">
+          <i class="fas fa-redo"></i>
+          Try Again
+        </button>
+      </div>
+
+      <!-- Loading more indicator -->
+      <div v-if="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading projects...</p>
       </div>
     </div>
+  </div>
+
+
+
+
 
 
     <!-- Section-3 -->
@@ -127,6 +182,159 @@
 
 import { ref, watch, onMounted, nextTick } from "vue";
 import { currentLanguage } from "../stores/languageStore.js"; // your global reactive var
+
+
+
+const cards = ref([])
+const isLoading = ref(true)
+const error = ref(null)
+
+// Real API URL - Using JSONPlaceholder photos API
+const API_URL = 'https://jsonplaceholder.typicode.com/photos?_limit=3'
+
+// Fetch data from API
+const fetchData = async () => {
+  try {
+    isLoading.value = true
+    error.value = null
+    
+    // Real API call
+    const response = await fetch(API_URL)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    
+    // Custom titles and descriptions for software projects
+    const customTitles = [
+      "Smart POS Cloud",
+      "Malaria Information System", 
+      "Mobile App"
+    ]
+    
+    const customDescriptions = [
+      "Cloud-based Point of Sale system with real-time analytics and inventory management",
+      "Comprehensive malaria tracking and prevention platform for healthcare providers",
+      "Cross-platform mobile application with offline capabilities and push notifications"
+    ]
+     const customImages = [
+      "https://cdn.prod.website-files.com/619e15d781b21202de206fb5/642e5f92f6147ed845692f97_How-Mobile-App-Testing-Makes-or-Breaks-Mobile-User-Experience.webp",
+      "https://cdn.prod.website-files.com/633fda66cb2f195f7271913e/63b3eb8d19c92c7acc5028bc_Cloud-pos_main.png  ",
+      "https://t4.ftcdn.net/jpg/02/83/46/33/360_F_283463385_mfnrx6RPU3BqObhVuVjYZjeZ5pegE7xq.jpg"
+    ]
+
+    // Custom project categories
+    const projectCategories = ["Mobile App Solutions", "POS Systems", "Web Development"]
+    
+    // Transform API data with our custom content
+    cards.value = data.map((item, index) => ({
+      id: item.id,
+      category: projectCategories[index] || "Project",
+      title: customTitles[index] || item.title,
+      description: customDescriptions[index] || item.title,
+      // Use software/tech related images
+      url: `https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&w=600`, // Dashboard
+      thumbnailUrl: customImages[index] || "Imagesx ",
+      techStack: ["Vue.js", "Node.js", "MongoDB"],
+      status: "Completed",
+      liked: false
+    }))
+    
+    console.log('Data successfully fetched from API:', API_URL)
+    
+  } catch (err) {
+    error.value = `Failed to load projects from API. Please check your connection. Error: ${err.message}`
+    console.error('Error fetching data from API:', err)
+    
+    // Fallback data with software project images
+    cards.value = [
+      {
+        id: 1,
+        category: "Business Solutions",
+        title: "Smart POS Cloud",
+        description: "Cloud-based Point of Sale system with real-time analytics and inventory management",
+        url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&w=600", // Dashboard
+        thumbnailUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&w=300",
+        techStack: ["Vue.js", "Node.js", "MongoDB"],
+        status: "Completed",
+        liked: false
+      },
+      {
+        id: 2,
+        category: "Healthcare Systems",
+        title: "Malaria Information System",
+        description: "Comprehensive malaria tracking and prevention platform for healthcare providers",
+        url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&w=600", // Healthcare
+        thumbnailUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&w=300",
+        techStack: ["React", "Python", "PostgreSQL"],
+        status: "In Progress",
+        liked: false
+      },
+      {
+        id: 3,
+        category: "Mobile Development",
+        title: "Mobile App",
+        description: "Cross-platform mobile application with offline capabilities and push notifications",
+        url: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&w=600", // Mobile
+        thumbnailUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&w=300",
+        techStack: ["React Native", "Firebase", "Redux"],
+        status: "Completed",
+        liked: false
+      }
+    ]
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Format title to be shorter
+const formatTitle = (title) => {
+  const words = title.split(' ').slice(0, 3)
+  return words.join(' ') + (title.split(' ').length > 3 ? '...' : '')
+}
+
+// Toggle like status
+const toggleLike = (cardId) => {
+  const card = cards.value.find(c => c.id === cardId)
+  if (card) {
+    card.liked = !card.liked
+  }
+}
+
+// View project function
+const viewProject = (card) => {
+  console.log('Viewing project:', card.title)
+  // In a real app, you might navigate to project details page
+  window.open(card.url, '_blank')
+}
+
+// Improved image error handling
+const handleImageError = (event, card) => {
+  console.log('Image failed to load, using fallback:', card.title)
+  event.target.src = `https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&w=300` // Fallback to dashboard image
+}
+
+// Get status color
+const getStatusColor = (status) => {
+  const colors = {
+    'Completed': '#10b981',
+    'In Progress': '#f59e0b',
+    'Planning': '#6366f1'
+  }
+  return colors[status] || '#6b7280'
+}
+
+// Fetch data when component mounts
+onMounted(() => {
+  fetchData()
+})
+
+
+
+
+
 const orgData = [
   {
     id: "1",
@@ -182,7 +390,7 @@ const orgData = [
     id: "6",
     parent: "3",
     name: "Ran Sany",
-    position: "IT Support Officer",
+    position: "Developer Officer",
     phone: "0987654321",
     email: "sara@example.com",
     address: "Phnom Penh",
@@ -274,8 +482,6 @@ function renderChart(series) {
 // Define the two text versions
 const fullTextEN = "Front-End Developer";
 const fullTextKH = "មន្ត្រីផ្នែកអភិវឌ្ឈន៍ប្រព័ន្ធទិន្នន័យ";
-const scrollContainer = ref(null);
-const activeDot = ref(0);
 
 const displayedText = ref("");
 let index = 0;
@@ -369,19 +575,6 @@ const typeText = () => {
 };
 
 
-//Animation Dot Dot Touch Scroll
-const updateActiveDot = () => {
-  const container = scrollContainer.value;
-  if (!container) return;
-
-  const scrollLeft = container.scrollLeft;
-  const cardWidth =
-    container.children[0].offsetWidth +
-    parseInt(getComputedStyle(container.children[0]).marginRight);
-
-  activeDot.value = Math.round(scrollLeft / cardWidth);
-};
-
 // Function to select text based on language
 const getFullText = () => {
   return currentLanguage.value === "KH" ? fullTextKH : fullTextEN;
@@ -391,11 +584,7 @@ const getFullText = () => {
 onMounted( async() => {
   typeText();
 
-    const container = scrollContainer.value;
-  if (container) {
-    container.addEventListener("scroll", updateActiveDot, { passive: true });
-    container.addEventListener("touchmove", updateActiveDot, { passive: true });
-  }
+
   await nextTick();
 
   // Observe each skill card
@@ -430,7 +619,600 @@ watch(currentLanguage, () => {
 </script>
 
 <style scoped>
+.section-2 {
+  padding: 4rem 0;
+  min-height: 80vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  font-family: "Khmer OS Muol Light";
+  text-align: center;
+  margin-bottom: 1rem;
+  color: whitesmoke;
+  font-weight: 500;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-family: "Khmer OS Battambang";
+  color: #d1d1d1;
+  margin-bottom: 3rem;
+  font-size: 1rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: fit-content;
+  position: relative;
+  animation: cardEntrance 0.6s ease-out var(--delay) both;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card:hover {
+  transform: 
+    translateY(-12px) 
+    rotateX(2deg) 
+    rotateY(1deg)
+    scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 15px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Project Badge */
+.project-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+}
+
+.category-badge {
+  background: rgba(102, 126, 234, 0.9);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+/* Tech Stack */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tech-tag {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid #e2e8f0;
+}
+
+/* Status Badge */
+.status-badge {
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Rest of the CSS remains the same as previous code */
+.card-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.8) 0%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover .card-border {
+  opacity: 1;
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+/* Card Entrance Animation */
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes titleGlow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6));
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Skeleton Loading Styles */
+.skeleton {
+  padding: 0;
+  animation: skeletonPulse 2s ease-in-out infinite;
+}
+
+.skeleton-image {
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.skeleton-content {
+  padding: 1.5rem;
+}
+
+.skeleton-title {
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  width: 70%;
+}
+
+.skeleton-description {
+  height: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  width: 90%;
+}
+
+.skeleton-footer {
+  height: 14px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  width: 60%;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes skeletonPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Content Styles */
+.card-image {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: scale(1);
+}
+
+.card:hover .card-image img {
+  transform: scale(1.15) rotate(0.5deg);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease;
+  transform: skewX(-20deg);
+}
+
+.card:hover .card-shine {
+  left: 150%;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.8) 0%,
+    rgba(118, 75, 162, 0.8) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  backdrop-filter: blur(2px);
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+  animation: overlayPulse 2s ease-in-out infinite;
+}
+
+@keyframes overlayPulse {
+  0%, 100% {
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.8) 0%,
+      rgba(118, 75, 162, 0.8) 100%
+    );
+  }
+  50% {
+    background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.9) 0%,
+      rgba(118, 75, 162, 0.9) 100%
+    );
+  }
+}
+
+.view-btn {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transform: translateY(20px);
+  opacity: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .view-btn {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+.view-btn:hover {
+  background: white;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+  background: white;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-title {
+  color: #667eea;
+}
+
+.card-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-description {
+  color: #555;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.like-btn {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  position: relative;
+  overflow: hidden;
+}
+
+.like-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.like-btn:hover::before {
+  left: 100%;
+}
+
+.like-btn:hover {
+  border-color: #ff4757;
+  color: #ff4757;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+}
+
+.like-btn.liked {
+  border-color: #ff4757;
+  background: linear-gradient(135deg, rgba(255, 71, 87, 0.1) 0%, rgba(255, 71, 87, 0.05) 100%);
+  color: #ff4757;
+  animation: likePulse 0.6s ease;
+}
+
+@keyframes likePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Error Message Styles */
+.error-message {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 16px;
+  color: #c53030;
+  margin: 2rem 0;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-message i {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #e53e3e;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.error-message p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+}
+
+.retry-btn:hover {
+  background: linear-gradient(135deg, #c53030 0%, #a53030 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  animation: fadeInUp 1s ease-out;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e0e0e0;
+  border-left: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-image {
+    height: 180px;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px) scale(1.01);
+  }
+}
+
+@media (max-width: 480px) {
+  .section-2 {
+    padding: 2rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .cards-container {
+    gap: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
 /* Updated Chart Container Style */
+
+.title-border {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #3498db);
+  margin: 0 auto 30px;
+  border-radius: 4px;
+  animation: borderFlow 3s ease infinite;
+}
 .chart-wrapper {
   width: 100%;
   max-width: 1100px;
@@ -444,6 +1226,10 @@ watch(currentLanguage, () => {
 #chartDiv {
   width: 100%;
   height: 650px;
+}
+
+.title-section4{
+  font-family: "Khmer OS Muol Light";
 }
 
 @media (max-width: 991px) {

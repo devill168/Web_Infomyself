@@ -31,24 +31,24 @@
           <h2 class="greeting" @mouseenter="handleTextHover" @mouseleave="handleTextLeave">
             {{
               currentLanguage === "KH"
-                ? "សួស្តី ខ្ញុំឈ្មោះ អ៊ុង សេរីរ័ត្ន — ជាគ្រូនគរបាលជាតិ, អភិវឌ្ឍន៍គេហទំព័រ Full Stack និងកម្មវិធីទូរស័ព្ទ, រចនា UI/UX, វិភាគមូលដ្ឋានទិន្នន័យ, និងអ្នកស្រាវជ្រាវ។"
-                : "Hi, I’m Ung Sereyrath — a National Police Instructor, Full Stack Web Developer, Mobile App Developer, UI/UX Designer, Database Analyst, and Researcher."
+                ? "សួស្តី ខ្ញុំឈ្មោះ រ៉ន ហ្សានី -- ខ្ញុំគឺជាមន្ត្រីអភិវឌ្ឍន៍កម្មវិធីបញ្ចូលទិន្នន័យ។"
+                : "Hi, I’m Ran Sany -- Developer Officer."
             }}
           </h2>
 
           <p class="description" @mouseenter="handleTextHover" @mouseleave="handleTextLeave">
             {{
               currentLanguage === "KH"
-                ? "ខ្ញុំមានចំណង់ចំណូលចិត្ត ក្នុងការបង្កើតបទពិសោធន៍ឌីជីថលឆ្លាតវៃ និងផ្តោតលើអ្នកប្រើប្រាស់ ថែមទាំងចែករំលែកចំណេះដឹង ជំរុញវឌ្ឍនភាព និងនវានុវត្តន៍។ បទពិសោធន៍របស់ខ្ញុំ មានទាំងផ្នែកអនុវត្តច្បាប់ និងបច្ចេកវិទ្យា ដែលផ្តល់ឱ្យខ្ញុំនូវទស្សនៈពិសេសមួយ — រួមទាំងវិន័យ ការគិតបែបទំនើប និងការដោះស្រាយបញ្ហា ដែលមានទិន្នន័យជាមូលដ្ឋាន។"
-                : "I’m passionate about creating smart, user-focused digital experiences while sharing knowledge that drives progress and innovation. My background in both law enforcement and technology gives me a unique perspective—blending discipline, design thinking, and data-driven problem solving."
+                ? "ខ្ញុំមានចំណង់ចំណូលចិត្ត ក្នុងការបង្កើតកម្មវិធីបច្ចេកវិទ្យាផ្សេងៗ ទំនាក់ទំនងក្នុងស្រុក និងក្រៅស្រុក ការស្រាវជ្រាវអ្វីដែលថ្មីៗ ជាពិសេសគឺការវិភាគហានិភ័យគ្រប់ស្រទប់ និងគិតគ្រប់ជ្រុងជ្រោយលើបញ្ហានៅថ្ងៃនេះ និងថ្ងៃស្អែក។"
+                : "I am passionate about creating various technology applications, domestic and international relations, researching new things, especially comprehensive risk analysis and thinking holistically about the problems of today and tomorrow."
             }}
           </p>
 
           <h5 class="highlight" @mouseenter="handleTextHover" @mouseleave="handleTextLeave">
             {{
               currentLanguage === "KH"
-                ? "ចេញពីការរចនាដែលមានភាពទាក់ទាញ និងការអភិវឌ្ឍកម្មវិធីគេហទំព័រ កម្មវិធីទូរស័ព្ទ រហូតដល់ការវិភាគទិន្នន័យ និងការធ្វើការស្រាវជ្រាវ ខ្ញុំខិតខំភ្ជាប់ភាពច្នៃប្រឌិតដែលមានគោលបំណងច្បាស់លាស់ — នឹងប្រែក្លាយគំនិតទៅជាលទ្ធផល ដែលមានឥទ្ធិពលដល់បុគ្គល និងអង្គការថែមទៀត។"
-                : "From designing intuitive interfaces and developing web/mobile applications to analyzing data and conducting research, I focus on turning ideas into meaningful, impactful results that empower people and organizations."
+                ? "មនុស្សគ្រប់រូប​កើត​មកមានចំណុចខ្លាំង និងចំណុចខ្សោយខុសៗគ្នា។ ត្រូវយល់ដឹង និង​ស្វែងយល់​ថា​តើចំណុចខ្លាំងរបស់​យើង​ជា​អ្វី។ សម្រាប់​អ្នក​ដែល​មិន​ទាន់​បាន​ដឹង​នោះ អ្នក​អាច​ស្វែង​យល់​ដោយ​ការ​ព្យាយាម​អ្វី​ដែល​ថ្មី​ជានិច្ច ពេល​ធ្វើ​សកម្មភាព​ប្រចាំ​ថ្ងៃ។ ឧទាហរណ៍ តាម​រយៈ​ការ​ចូលរួម​សហគមន៍​ដែល​មាន​ចំណង់ចំណូលចិត្ត​ដូចគ្នា ទទួល​យក​ការ​បណ្ដុះបណ្ដាល​ទាក់ទង​នឹង​ការ​អភិវឌ្ឍន៍​ខ្លួនឯង និង​អ្នកដទៃ។ បន្ត​ពង្រឹង​ភាព​ខ្លាំង រហូត​ដល់អ្នក​អាច​ផលិត​អ្វីមួយ​ដែល​មាន​គុណភាព។ លើស​ពី​នេះ ត្រូវ​រៀន​កំណត់​អត្តសញ្ញាណ​ចំណុចខ្សោយ​របស់​អ្នក​ផង​ដែរ ហើយ​ជួសជុល​វា​ឲ្យ​រឹងមាំឡើង។"
+                : "Everyone is born with different strengths and weaknesses. Understand and explore what your strengths are. For those who don’t know, you can find out by constantly trying new things in your daily activities. For example, by joining a community of like-minded people, taking training on self-development and others. Continue to strengthen your strengths until you can produce something of quality. In addition, learn to identify your weaknesses and work on them to become stronger."
             }}
           </h5>
         </div>
@@ -78,26 +78,54 @@
       </div>
     </section>
 
-    <!-- SECTION 3 — TIMELINE -->
-    <section class="section-3" ref="section3">
+
+  <!-- SECTION 3 — TIMELINE -->
+  <section class="section-3" ref="section3">
+    <div class="section-header">
+      <h1 class="title">
+        {{ currentLanguage === "KH" ? "បទពិសោធន៍ និងការអប់រំ" : "Experience & Education" }}
+      </h1>
+      <div class="title-border"></div>
+      <p class="section-description">
+        {{
+          currentLanguage === "KH"
+            ? "ដំណើរការអភិវឌ្ឍន៍វិជ្ជាជីវៈ និងការសិក្សារបស់ខ្ញុំ"
+            : "My professional development and educational journey"
+        }}
+      </p>
+    </div>
+    
+    <div class="timeline-container">
       <div class="timeline">
         <div
           class="timeline-item"
           v-for="(item, index) in translatedTimeline"
           :key="index"
-          :class="{ 'timeline-item-hover': hoveredTimeline === index }"
+          :class="{ 
+            'timeline-item-hover': hoveredTimeline === index,
+            'timeline-item-left': index % 2 === 0,
+            'timeline-item-right': index % 2 !== 0
+          }"
           @mouseenter="() => handleTimelineHover(index)"
           @mouseleave="() => handleTimelineLeave(index)"
         >
-          <div class="year">{{ item.year }}</div>
-          <div class="content">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-            <div class="timeline-connector"></div>
+          <div class="timeline-marker">
+            <div class="marker-circle"></div>
+            <div class="marker-pulse"></div>
+          </div>
+          
+          <div class="timeline-content">
+            <div class="year-badge">{{ item.year }}</div>
+            <div class="content-card">
+              <h3 class="content-title">{{ item.title }}</h3>
+              <p class="content-description">{{ item.description }}</p>
+              <div class="content-arrow"></div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- SECTION 4 — QUOTE -->
     <section class="section-4" ref="section4">
@@ -105,8 +133,8 @@
         <h1 class="quote">
           {{
             currentLanguage === "KH"
-              ? "ការកសាងបទពិសោធន៍ល្អ និងមានតម្លៃ ការគិតគូរយ៉ាងល្អិតល្អន់ និងការរចនាដ៏ស្ងប់ស្ងាត់បែបទំនើប"
-              : "Building clean and meaningful experiences through thoughtful code and quiet design."
+              ? "មនុស្សគ្រប់រូប តែងតែប្រាថ្នាចង់ជោគជ័យក្នុងជីវិត ជាពិសេសរឿងការងារ។ ទោះយ៉ាងណាក៏ដោយ ជារឿយៗលទ្ធផលដែលទទួលបានក្នុងការងារ ខុសពីអ្វីដែលយើងចង់នឹងនឹងរំពឹកទុក"
+              : "People have aspirations in life, especially in work. However, the principles of responsibility in work are different from what we would like to imagine."
           }}
         </h1>
 
@@ -190,26 +218,26 @@ const hoveredCard = ref(null);
 
 /* KH Timeline */
 const timelineItems = ref([
-  { year: '២០០៥', title: 'វិទ្យាល័យ', description: 'វិទ្យាល័យសន្ធរម៉ុក រាជធានីភ្នំពេញ' },
-  { year: '២០១០', title: 'បរិញ្ញាបត្រ ព័ត៌មានវិទ្យា', description: 'សាកលវិទ្យាល័យមេគង្គកម្ពុជា រាជធានីភ្នំពេញ' },
-  { year: '២០១១', title: 'បរិញ្ញាបត្រ អង់គ្លេស', description: 'សាកលវិទ្យាល័យគ្រប់គ្រងជាតិ រាជធានីភ្នំពេញ' },
-  { year: '២០១៣', title: 'បរិញ្ញាបត្រជាន់ខ្ពស់ ព័ត៌មានវិទ្យា', description: 'សាកលវិទ្យាល័យន័រតុន រាជធានីភ្នំពេញ' },
-  { year: '២០១០', title: 'ការគ្រប់គ្រងទិន្នន័យ', description: 'B.N.Consult - ក្រុមហ៊ុនប្រឹក្សាអភិវឌ្ឍកម្មវិធី/ប្រមូលទិន្នន័យ' },
-  { year: '២០១៣', title: 'ការអភិវឌ្ឍប្រព័ន្ធ', description: 'B.N.Consult - ក្រុមហ៊ុនអភិវឌ្ឍកម្មវិធី' },
-  { year: '២០១៧', title: 'Freelance', description: 'អ្នកអភិវឌ្ឍប្រព័ន្ធឯករាជ្យ' },
-  { year: '២០២០', title: 'គ្រូនគរបាលជាតិ', description: 'សាលាបណ្តុះបណ្តាល នគរបាលជាតិ' },
+  { year: '២០១២', title: 'វិទ្យាល័យ', description: 'វិទ្យាល័យបាក់ទូក រាជធានីភ្នំពេញ' },
+  { year: '២០១៦', title: 'បរិញ្ញាបត្រ ព័ត៌មានវិទ្យា', description: 'សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ រាជធានីភ្នំពេញ' },
+  { year: '២០១២', title: 'សញ្ញាប័ត្រ ភាសាអង់គ្លេស', description: 'វិទ្យាស្ថានអ៊ីអិលធី រាជធានីភ្នំពេញ' },
+  { year: '២០១៣', title: 'សញ្ញាប័ត្រ អភិវឌ្ឍន៍ប្រព័ន្ធទិន្នន័យកូបូធូបុក', description: 'អង្គការ FHI' },
+  { year: '២០១៩', title: 'សញ្ញាប័ត្រ អង្កេតតាមដានសំបុកចម្លង', description: 'វិទ្យាស្ថានចូលអ៊ី ប្រទេសចិន' },
+  { year: '២០២០', title: 'ការងារឯករាជ្យ', description: 'អ្នកអភិវឌ្ឍប្រព័ន្ធឯករាជ្យ' },
+  { year: '២០២៤', title: 'សញ្ញាប័ត្រ បញ្ញាសប្បនិមិត្ត', description: 'សាកលវិទ្យាល័យប៉ាបទីស នៃហុងកុង ប្រទេសចិន' },
+  { year: '២០២២', title: 'មន្រ្តីព័ត៌មានវិទ្យា', description: 'ផ្នែកអភិវឌ្ឍន៍កម្មវិធី នៅម.គ.ច នៃក្រសួងសុខាភិបាល' },
 ]);
 
 /* EN Timeline */
 const timelineItemsEN = [
-  { year: '2005', title: 'High School', description: 'SANTONMOK High School, Phnom Penh' },
-  { year: '2010', title: 'B.A. in IT', description: 'Cambodian Mekong University, Phnom Penh' },
-  { year: '2011', title: 'B.A. in English', description: 'National University of Management, Phnom Penh' },
-  { year: '2013', title: 'Master in IT', description: 'Norton University, Phnom Penh' },
-  { year: '2010', title: 'Data Management', description: 'B.N.Consult — Data & system development consulting' },
-  { year: '2013', title: 'System Development', description: 'B.N.Consult — System development team' },
-  { year: '2017', title: 'Freelance Developer', description: 'Independent system developer for various clients' },
-  { year: '2020', title: 'National Police Instructor', description: 'Training School for the National Police of Cambodia' }
+  { year: '2012', title: 'Baktouk High School', description: 'Baktouk High School, Phnom Penh' },
+  { year: '2016', title: 'B.A. in IT', description: 'Royal University of Phnom Penh' },
+  { year: '2012', title: 'DIPLOMA English', description: 'ELT School, Phnom Penh' },
+  { year: '2013', title: 'Certification Kobotobox', description: 'FHI Organization' },
+  { year: '2019', title: 'Certificate Surveillance', description: 'Kunming University of China' },
+  { year: '2020', title: 'Freelance', description: 'Freelance Create Web Mobile Application' },
+  { year: '2024', title: 'Certificate AI', description: 'Baptis University Of Hong Kong, China' },
+  { year: '2022', title: 'Developer Officer', description: 'Developer Officer at National Center Parasitology Entomology and Malaria Control' }
 ];
 
 /* KH Hobbies */
@@ -339,8 +367,22 @@ const handleTextHover = (e) => {
 const handleTextLeave = (e) => {
   e.target.style.transform = "translateY(0)";
 };
-const handleTimelineHover = (i) => (hoveredTimeline.value = i);
-const handleTimelineLeave = () => (hoveredTimeline.value = null);
+const handleTimelineHover = (index) => {
+  hoveredTimeline.value = index;
+  
+  // Add ripple effect to marker
+  const markers = document.querySelectorAll('.marker-circle');
+  if (markers[index]) {
+    markers[index].classList.add('marker-ripple');
+    setTimeout(() => {
+      markers[index].classList.remove('marker-ripple');
+    }, 600);
+  }
+};
+
+const handleTimelineLeave = () => {
+  hoveredTimeline.value = null;
+};
 
 /* Image + Quote hover */
 const startImageFloat = () => (isImageFloating.value = true);
@@ -379,7 +421,6 @@ onUnmounted(() => observer && observer.disconnect());
 
 /* Section 1 Styles - Typewriter Effect */
 .section-1 {
-  padding: 100px 0;
   text-align: center;
   opacity: 0;
   transform: translateY(50px);
@@ -416,7 +457,6 @@ onUnmounted(() => observer && observer.disconnect());
 .title {
   font-size: 4rem;
   color: #2c3e50;
-  margin-bottom: 10px;
   font-weight: 800;
   background: linear-gradient(135deg, white, #d1d1d1, #2c3e50);
   -webkit-background-clip: text;
@@ -425,13 +465,15 @@ onUnmounted(() => observer && observer.disconnect());
   opacity: 0;
   transform: scale(0.8);
   animation: titleReveal 1.2s ease forwards 0.5s;
+  font-family: "Khmer OS Muol Light";
+  line-height: 150px;
 }
 
 .title-underline {
   width: 0;
   height: 4px;
   background: linear-gradient(90deg, #3498db, #2c3e50);
-  margin: 0 auto 30px;
+  margin: 0 auto;
   border-radius: 2px;
   animation: underlineExpand 1s ease forwards 1s;
 }
@@ -445,6 +487,8 @@ onUnmounted(() => observer && observer.disconnect());
   opacity: 0;
   transform: translateY(20px);
   animation: subtitleReveal 1s ease forwards 1.2s;
+  font-family: "Khmer OS Battambang";
+  line-height: 40px;
 }
 
 @keyframes titleReveal {
@@ -634,7 +678,7 @@ onUnmounted(() => observer && observer.disconnect());
 .highlight {
   font-family: "Khmer OS Battambang";
   font-size: 1rem;
-  color: #2b3a49;
+  color:#2b3a49;
   line-height: 1.7;
   padding: 25px;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
@@ -643,12 +687,27 @@ onUnmounted(() => observer && observer.disconnect());
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Section 3 Styles - Staggered Timeline */
+/* Section 3 Styles - Enhanced Timeline */
 .section-3 {
-  padding: 100px 0;
+  padding: 10px 0;
   opacity: 0;
   transform: translateY(50px);
-  transition: all 1s ease;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(155, 89, 182, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .section-3.animate-in {
@@ -656,178 +715,474 @@ onUnmounted(() => observer && observer.disconnect());
   transform: translateY(0);
 }
 
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header .title {
+  font-size: 3.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #2c3e50, #3498db, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+.section-header .title-border {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #3498db);
+  margin: 0 auto 30px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  background-size: 200% 100%;
+  animation: borderFlow 3s ease infinite;
+}
+
+.section-description {
+  font-size: 1.3rem;
+  color: #d1d1d1;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 300;
+  font-family: "Khmer OS Muol Light";
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .timeline {
   position: relative;
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 60px 0;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 4px;
   height: 100%;
-  background: linear-gradient(to bottom, #3498db, #9b59b6);
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    #3498db 10%, 
+    #9b59b6 50%, 
+    #3498db 90%, 
+    transparent 100%);
   border-radius: 2px;
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
 }
 
 .timeline-item {
-  font-family: "Khmer OS Battambang";
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 40px;
   position: relative;
-  margin: 30px 0;
-  width: 50%;
+  margin-bottom: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
   opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: timelineSlideIn 0.8s ease forwards;
-  cursor: pointer;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: timelineItemEntrance 0.8s ease forwards;
+}
+
+.timeline-item-left {
+  justify-content: flex-start;
+  padding-right: calc(50% + 40px);
+}
+
+.timeline-item-right {
+  justify-content: flex-end;
+  padding-left: calc(50% + 40px);
 }
 
 .timeline-item:nth-child(even) {
-  align-self: flex-end;
-  justify-content: flex-start;
-  padding-left: 40px;
-  padding-right: 0;
-  transform: translateX(50px);
+  animation-delay: 0.2s;
 }
 
-.timeline-item-hover {
-  transform: translateX(-30px) !important;
-  z-index: 10;
+.timeline-item:nth-child(odd) {
+  animation-delay: 0.4s;
 }
 
-.timeline-item:nth-child(even).timeline-item-hover {
-  transform: translateX(30px) !important;
-}
-
-.timeline-item::after {
-  content: '';
+.timeline-marker {
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker-circle {
   width: 24px;
   height: 24px;
-  right: -12px;
   background: white;
   border: 4px solid #3498db;
-  top: 20px;
   border-radius: 50%;
+  position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 rgba(52, 152, 219, 0.4);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 0 0 rgba(52, 152, 219, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.timeline-item:hover::after {
-  transform: scale(1.3);
-  box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
-  background: #3498db;
-}
-
-.timeline-item:nth-child(even)::after {
-  left: -12px;
-  right: auto;
-}
-
-.year {
+.marker-pulse {
   position: absolute;
-  top: 20px;
-  right: -100px;
+  width: 40px;
+  height: 40px;
+  background: #3498db;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease;
+}
+
+.timeline-item:hover .marker-circle {
+  transform: scale(1.3);
+  background: #3498db;
+  box-shadow: 
+    0 0 0 8px rgba(52, 152, 219, 0.2),
+    0 0 0 16px rgba(52, 152, 219, 0.1),
+    0 5px 20px rgba(0, 0, 0, 0.2);
+  border-color: white;
+}
+
+.timeline-item:hover .marker-pulse {
+  opacity: 0.6;
+  transform: scale(1);
+  animation: markerPulse 2s ease-out infinite;
+}
+
+.marker-ripple {
+  animation: markerRipple 0.6s ease-out;
+}
+
+@keyframes markerRipple {
+  0% {
+    box-shadow: 
+      0 0 0 0 rgba(52, 152, 219, 0.4),
+      0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  70% {
+    box-shadow: 
+      0 0 0 15px rgba(52, 152, 219, 0),
+      0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 
+      0 0 0 0 rgba(52, 152, 219, 0),
+      0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.2);
+  }
+}
+
+.timeline-content {
+  position: relative;
+  width: calc(80% - 80px);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+}
+
+.year-badge {
+  position: absolute;
+  top: 0;
+  font-family: "Khmer OS Muol Light";
   font-weight: bold;
   color: #3498db;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   background: white;
-  padding: 5px 15px;
-  border-radius: 20px;
+  padding: 8px 20px;
+  border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  pointer-events: none; /* Prevent year from interfering with hover */
+  transition: all 0.4s ease;
+  z-index: 5;
+  border: 2px solid transparent;
 }
 
-.timeline-item:hover .year {
-  transform: scale(1.1);
+.timeline-item-left .year-badge {
+  right: -20px;
+}
+
+.timeline-item-right .year-badge {
+  left: -20px;
+}
+
+.timeline-item:hover .year-badge {
+  transform: translateY(-5px) scale(1.05);
   background: #3498db;
   color: white;
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.timeline-item:nth-child(even) .year {
-  left: -100px;
-  right: auto;
-}
-
-.content {
-  padding: 25px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  transition: all 0.3s ease;
+.content-card {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-.content::before {
+.content-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.05), transparent);
+  transition: left 0.7s ease;
 }
 
-.timeline-item:hover .content::before {
+.timeline-item:hover .content-card::before {
   left: 100%;
 }
 
-.timeline-item:hover .content {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+.timeline-item:hover .content-card {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 15px 25px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(145deg, #ffffff, #f0f4f8);
 }
 
-.content h3 {
-  margin-top: 0;
+.content-title {
+  margin-top: 10%;
+  font-family: "Khmer OS Muol Light";
+  font-size: 1.4rem;
+  line-height: 40px;
   color: #2c3e50;
-  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.content p {
+.content-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  transition: width 0.4s ease;
+}
+
+.timeline-item:hover .content-title {
+  color: #3498db;
+}
+
+.timeline-item:hover .content-title::after {
+  width: 50px;
+}
+
+.content-description {
+  font-family: "Khmer OS Battambang";
+  font-size: 1rem;
+  color: #5d6d7e;
+  line-height: 1.6;
+  transition: all 0.3s ease;
   margin-bottom: 0;
-  color: #7f8c8d;
-  line-height: 1.5;
 }
 
-.timeline-connector {
+.timeline-item:hover .content-description {
+  color: #2c3e50;
+}
+
+.content-arrow {
   position: absolute;
   top: 50%;
-  right: -20px;
   width: 20px;
-  height: 2px;
-  background: #3498db;
-  transform: translateY(-50%);
-  opacity: 0;
+  height: 20px;
+  background: #f8f9fa;
+  transform: translateY(-50%) rotate(45deg);
   transition: all 0.3s ease;
+  opacity: 0;
 }
 
-.timeline-item:hover .timeline-connector {
+.timeline-item-left .content-arrow {
+  right: -10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item-right .content-arrow {
+  left: -10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item:hover .content-arrow {
   opacity: 1;
-  width: 40px;
+  background: #f0f4f8;
 }
 
-.timeline-item:nth-child(even) .timeline-connector {
-  left: -20px;
-  right: auto;
+.timeline-item-hover {
+  z-index: 20;
 }
 
-@keyframes timelineSlideIn {
+.timeline-item-hover .content-card {
+  transform: translateY(-10px) scale(1.03) !important;
+  box-shadow: 
+    0 25px 50px rgba(52, 152, 219, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+@keyframes timelineItemEntrance {
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .timeline-content {
+    width: calc(100% - 60px);
+  }
+  
+  .timeline-item-left {
+    padding-right: calc(50% + 30px);
+  }
+  
+  .timeline-item-right {
+    padding-left: calc(50% + 30px);
+  }
+   .content-title {
+    margin-top: 15%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-3 {
+    padding: 80px 0;
+  }
+  
+  .section-header .title {
+    font-size: 2.5rem;
+  }
+  
+  .section-description {
+    font-size: 1.1rem;
+    padding: 0 20px;
+  }
+  
+  .timeline::before {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    padding: 0 !important;
+    margin-bottom: 60px;
+    justify-content: flex-start !important;
+  }
+  
+  .timeline-marker {
+    left: 30px;
+  }
+  
+  .timeline-content {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+  
+  .year-badge {
+    position: relative;
+    top: auto;
+    left: auto !important;
+    right: auto !important;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+  
+  .content-arrow {
+    display: none;
+  }
+  .content-title{
+    margin-top: 0%;
+  }
+  
+  .timeline-item-left .year-badge,
+  .timeline-item-right .year-badge {
+    left: 0 !important;
+    right: auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .timeline-container {
+    padding: 0 15px;
+  }
+  
+  .timeline-content {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+  
+  .timeline-marker {
+    left: 25px;
+  }
+  
+  .content-card {
+    padding: 25px 20px;
+  }
+  
+  .content-title {
+    font-size: 1.2rem;
+  }
+  
+  .content-description {
+    font-size: 0.95rem;
+  }
+}
+
+/* Animation keyframes reused from other sections */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes borderFlow {
+  0%, 100% { background-position: -200% 0; }
+  50% { background-position: 200% 0; }
 }
 
 
@@ -1027,7 +1382,7 @@ onUnmounted(() => observer && observer.disconnect());
 
 .section-description {
   font-size: 1.3rem;
-  color: #5d6d7e;
+  color: #d1d1d1;
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.7;
