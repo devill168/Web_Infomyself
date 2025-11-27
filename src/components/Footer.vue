@@ -16,7 +16,7 @@
               <i class="fab fa-github"></i>
               <span class="glow"></span>
             </div>
-            <span class="brand-title"><a href="https://www.deepseek.com/">Download Source Code</a></span>
+            <span class="brand-title"><a href="https://github.com/devill168/Web_Infomyself.git">Download Source Code</a></span>
             <p class="brand-text">
               Discover and explore GitHub users and their repositories. Built with Vue.js.
             </p>
